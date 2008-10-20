@@ -20,8 +20,8 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-require 'et/renderable'
-require 'et/error'
-require 'et/client'
-require 'et/subscriber'
-require 'et/list'
+
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + "/et"))
+%w(renderable error client subscriber list).each do |lib|
+  require lib
+end
