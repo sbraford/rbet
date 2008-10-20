@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<exacttarget>
+  <authorization>
+    <username><%= @username %></username>
+    <password><%= @password %></password>
+  </authorization>
+  <%= @system %>
+</exacttarget>

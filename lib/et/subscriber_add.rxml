@@ -1,0 +1,16 @@
+<system>
+  <system_name>subscriber</system_name>
+  <action>add</action>
+  <search_type>listid</search_type>
+  <search_value><%= @subscriber_listid %></search_value>
+  <search_value2></search_value2>
+  <values>
+    <Email__Address><%= @email %></Email__Address>
+    <status>active</status>
+    <Full__Name><%= @name %></Full__Name>
+    <% @attributes.each do|name,value| %>
+      <<%= name %>><%= (value.is_a?(Array)) ? value.join(',') : value %></<%= name %>>
+    <% end %>
+  </values>
+  <update>true</update>
+</system>

@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+<exacttarget>
+<system>
+  <list><error>93</error><error_description>You did not specify a valid list type.</error_description></list>
+</system>
+</exacttarget>

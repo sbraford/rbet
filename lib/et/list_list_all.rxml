@@ -1,0 +1,6 @@
+<system>
+  <system_name>list</system_name>
+  <action>retrieve</action>
+  <search_type>listname</search_type>
+  <search_value></search_value>
+</system>

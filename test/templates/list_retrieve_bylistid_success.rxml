@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<exacttarget>
+  <system>
+    <list>
+      <list_name>API-API Test List</list_name>
+      <list_type>Public</list_type>
+      <modified>8/18/2003 10:11:59 AM</modified>
+      <subscriber_count>129</subscriber_count>
+      <active_total>126</active_total>
+      <held_count>1</held_count>
+      <bounce_count>2</bounce_count>
+      <unsub_count>0</unsub_count>
+    </list>
+  </system>
+</exacttarget>

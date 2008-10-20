@@ -1,0 +1,8 @@
+<system>
+  <system_name>subscriber</system_name>
+  <action>retrieve</action>
+  <search_type>subid</search_type>
+  <search_value><%= @subid %></search_value>
+  <search_value2></search_value2>
+  <showChannelID></showChannelID>
+</system>

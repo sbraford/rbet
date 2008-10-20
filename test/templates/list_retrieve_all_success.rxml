@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<exacttarget>
+  <system>
+    <list>
+      <listid>12345</listid>
+      <listid>67890</listid>
+      <listid>80080</listid>
+      <listid>80081</listid>
+      <listid>80082</listid>
+    </list>
+  </system>
+</exacttarget>

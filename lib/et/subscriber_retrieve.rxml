@@ -1,0 +1,8 @@
+<system>
+  <system_name>subscriber</system_name>
+  <action>retrieve</action>
+  <search_type>listid</search_type>
+  <search_value><%= @list_id %></search_value>
+  <search_value2><%= @email %></search_value2>
+  <showChannelID></showChannelID>
+</system>

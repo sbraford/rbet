@@ -1,0 +1,10 @@
+== Ruby for ExactTarget
+
+  This is an attempt to make integrating easier with ExactTarget.  ExactTarget is 
+  an email newsletter system designed to make it easy to setup timely newsletters.
+
+  Ruby is a high level programming language that makes development fun and productive.
+
+== Notes
+
+2000 character limit for each attribute
