@@ -4,7 +4,7 @@ subscriber = ET::Subscriber.new($et_uri, $et_user, $et_pass, :debug_output => $s
 list = ET::List.new($et_uri, $et_user, $et_pass,:debug_output => $stderr)
 list_id = list.all.first
 
-id = subscriber.add( 'tester555@testsomething.com', 'Tester Name', 1149947, :keywords => ['hello','what','why'] ).inspect
+id = subscriber.add( 'tester555@testsomething.com', 1149947, :keywords => ['hello','what','why'] ).inspect
 
 subscriber = subscriber.load_by_id(id)
 

@@ -104,12 +104,10 @@ module ET
     #   add this user as a new subscriber to the list, with a set of attributes
     # params:
     #   listid: id of the e-mail list to subscribe this user to 
-    #   name: name of the subscriber
     #   email: E-mail address of subscriber
-    def add( email, name, listid, attributes ={} )
+    def add( email, listid, attributes ={} )
       @email = email
       @subscriber_listid = listid
-      @name = name
       @attributes = attributes
       response = send do|io|
         io << render_template('subscriber_add')

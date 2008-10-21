@@ -7,7 +7,6 @@
   <values>
     <Email__Address><%= @email %></Email__Address>
     <status>active</status>
-    <Full__Name><%= @name %></Full__Name>
     <% @attributes.each do|name,value| %>
       <<%= name %>><%= (value.is_a?(Array)) ? value.join(',') : value %></<%= name %>>
     <% end %>
