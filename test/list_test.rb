@@ -4,7 +4,7 @@ class ListClient  < Test::Unit::TestCase
   include ET::TestCase
   def setup
     super
-    @client = ET::List.new('http://127.0.0.1:99999/test/','tester','tester11', :use_ssl => false, :debug_output => $stderr)
+    @client = ET::List.new('tester','tester11', :service_url => 'http://127.0.0.1:99999/test/', :use_ssl => false, :debug_output => $stderr)
   end
   
   def test_list_all

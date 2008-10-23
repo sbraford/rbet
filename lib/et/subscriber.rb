@@ -1,6 +1,8 @@
 #
 # Copyright (c) 2007 Todd A. Fisher
 #
+# Portions Copyright (c) 2008 Shanti A. Braford
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -41,34 +43,20 @@ module ET
   #   => true|false
   #
   #   # subscribe a new user to an existing list
-  #   subscriber = Subscriber.create('user@example.com',list)
+  #   subscriber = Subscriber.add('user@example.com',list)
   #   => ET::Subscriber
   #
   #   # add the user to a specific list
   #   subscriber.add(list)
   #   => ET::Subscriber
   #
-  #   # remove the user from a specific list
-  #   subscriber.remove(list)
-  #   => ET::Subscriber
-  #
   class Subscriber < Client
     attr_accessor :attrs
     attr_reader :email, :status
  
-    def initialize(service_url,username,password,options={})
+    def initialize(username,password,options={})
       super
       @attrs = {}
-    end
-
-    def load_by_id(id)
-      @email = email
-      response = send do|io|
-        io << render_template('subscriber_retrieve')
-      end
-      Error.check_response_error(response)
-      load_response(response.read_body)
-      self
     end
 
     def load!(email)
@@ -115,12 +103,6 @@ module ET
       Error.check_response_error(response)
       doc = Hpricot.XML(response.read_body)
       doc.at("subscriber_description").inner_html.to_i
-    end
-
-    def save
-    end
-    
-    def delete
     end
 
   end

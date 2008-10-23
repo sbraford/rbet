@@ -1,10 +1,39 @@
-== Ruby for ExactTarget
+== Ruby Library for ExactTarget
 
   This is an attempt to make integrating easier with ExactTarget.  ExactTarget is 
   an email newsletter system designed to make it easy to setup timely newsletters.
+  
+  Exact Target: http://www.exacttarget.com/
+  
+  Exact Target API:
+  http://developers.exacttarget.com/Web/help/Overview/Introduction_to_ExactTarget_API_Help.htm
 
-  Ruby is a high level programming language that makes development fun and productive.
+== Adding rbet to a Rails Project
+  
+  If you are using Git to manage your rails project and would like to add rbet as a submodule:
+  
+    git submodule add git://github.com/sbraford/rbet.git vendor/rbet
+    
+  Then in the bottom of your environment.rb, or in an initializer, add:
+
+    require File.join(RAILS_ROOT, 'vendor', 'rbet', 'lib', 'et.rb')
+
+== Development Notes
+  
+  Original development work was performed by Todd A. Fisher.
+  
+  Minor changes and forking to Git have been added by Shanti A. Braford.  (shantibraford@gmail.com)
+  
+== Contributing
+
+  If you'd like to contribute, fork a copy of the repo on GitHub, or directly via:
+  
+  GitHub home: http://github.com/sbraford/rbet/tree/master
 
 == Notes
 
-2000 character limit for each attribute
+  2000 character limit for each attribute
+
+== Win32 Notes
+
+  This has not been tested on Windows.  May the force be with you, young win32 jedi =)

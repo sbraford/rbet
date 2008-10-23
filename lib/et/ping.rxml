@@ -1,0 +1,4 @@
+<system>
+  <system_name>diagnostics</system_name>
+  <action>Ping</action>
+</system>

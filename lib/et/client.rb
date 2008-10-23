@@ -1,6 +1,8 @@
 #
 # Copyright (c) 2007 Todd A. Fisher
 #
+# Portions Copyright (c) 2008 Shanti A. Braford
+#
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
 # "Software"), to deal in the Software without restriction, including
@@ -28,10 +30,21 @@ module ET
   class Client
     attr_reader :username, :password, :headers
     include ET::Renderable
-
-    def initialize(service_url,username,password,options={})
+    
+    #  Initializes a new ET::Client object
+    #  
+    #   Usaage:
+    #    
+    #     client = ET::Client.new('tester','tester11', {:service_url => 'http://127.0.0.1:99999/test/', :use_ssl => false})
+    #     client.status
+    #     => "Running"
+    #     client.live?
+    #      => true
+    #
+    def initialize(username,password,options={})
       @username = username
       @password = password
+      service_url = options[:service_url] ? options[:service_url] : 'https://www.exacttarget.com/api/integrate.asp?qf=xml'
       @uri = URI.parse(service_url)
       @url = Net::HTTP.new(@uri.host, @uri.port)
       @url.use_ssl = options.key?(:use_ssl) ? options[:use_ssl] : true
@@ -40,7 +53,23 @@ module ET
         'Content-Type' => 'application/x-www-form-urlencoded'
       }
     end
-
+    
+    # Boolean value of whether the service is running or not currently
+    def live?
+      @current_status ||= status
+      @current_status == 'Running'
+    end
+    
+    # Returns the string value from the ExactTarget API ping method. ("Running" when the system is operational)
+    def status
+      response = send do|io|
+        io << render_template('ping')
+      end
+      Error.check_response_error(response)
+      doc = Hpricot.XML( response.read_body )
+      @current_status = doc.at("Ping").inner_html
+    end
+    
     # usage:
     #   send do|io|
     #     io << 'more xml'
