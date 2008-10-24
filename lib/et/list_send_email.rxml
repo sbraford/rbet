@@ -1,0 +1,12 @@
+<system>
+  <system_name>job</system_name>
+  <action>send</action>
+  <search_type>emailid</search_type>
+  <search_value><%= @email_id %></search_value>
+  <% @extra_attrs.each do|name, value| %>
+    <<%= name.to_s %>><%= value.to_s %></<%= name %>>
+  <% end %>
+  <lists>                        
+    <list><%= @list_id %></list>
+  </lists>
+</system>

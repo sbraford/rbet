@@ -31,7 +31,7 @@ module ET
   # usage:
   #
   #   # get an existing subscriber
-  #   subscriber = Subscriber.retrieve('user@example.com')
+  #   subscriber = Subscriber.load!('user@example.com')
   #   => ET::Subscriber
   #
   #   # check if the user is subscribed to a specific list
@@ -58,7 +58,7 @@ module ET
       super
       @attrs = {}
     end
-
+    
     def load!(email)
       @email = email
       response = send do|io|

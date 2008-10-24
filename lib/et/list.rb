@@ -126,7 +126,19 @@ module ET
       doc = Hpricot.XML( response.read_body )
       doc.at("list_description").inner_html.to_i
     end
-
+    
+    def send_email(list_id, email_id, attrs = {})
+      defaults = {:from_name => '', :from_email => '', :additional => '',
+                  :multipart_mime => true, :track_links => true, :send_date => 'immediate', :send_time => ''}
+      @list_id, @email_id = list_id, email_id
+      @extra_attrs = defaults.merge(attrs)
+      response = send do|io|
+        io << render_template('list_send_email')
+      end
+      Error.check_response_error(response)
+      puts "Response Body: #{response.read_body} \n"
+      #doc = Hpricot.XML( response.read_body )
+    end
 
   end
 end
