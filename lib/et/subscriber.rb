@@ -34,20 +34,8 @@ module ET
   #   subscriber = Subscriber.load!('user@example.com')
   #   => ET::Subscriber
   #
-  #   # check if the user is subscribed to a specific list
-  #   subscriber.subscribed?( list )
-  #   => true|false
-  #
-  #   # check if the user is subscribed to any list
-  #   subscriber.subscribed?
-  #   => true|false
-  #
   #   # subscribe a new user to an existing list
   #   subscriber = Subscriber.add('user@example.com',list)
-  #   => ET::Subscriber
-  #
-  #   # add the user to a specific list
-  #   subscriber.add(list)
   #   => ET::Subscriber
   #
   class Subscriber < Client

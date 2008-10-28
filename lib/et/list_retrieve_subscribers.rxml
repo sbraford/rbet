@@ -1,0 +1,6 @@
+<system>
+  <system_name>list</system_name>
+  <action>retrieve_sub</action>
+  <search_type>listid</search_type>
+  <search_value><%= @list_id %></search_value>
+</system>

@@ -28,36 +28,22 @@ module ET
   # usage:
   #
   #   # create a new subscriber list
-  #   super_list = List.create 'Super list', :type => :public
-  #   => ET::List
-  #
-  #   # rename the list
-  #   super_list.edit :name => 'Basic list'
-  #   => ET::List
-  #
-  #   # make it private
-  #   super_list.edit :type => :private
+  #   super_list = List.add 'Super list', :type => :public
   #   => ET::List
   #
   #   # retrieve the list by name
-  #   basic_list = List.retrieve :name => 'Basic list'
+  #   basic_list = List.retrieve_by_name('My Super List')
   #   => ET::List
   #
   #   # retrieve by id
-  #   basic_list = List.retrieve :id => 12322
+  #   basic_list = List.retrieve_by_id(12322)
   #   => ET::List
   #
-  #   # see if this user is subscribed to the list
-  #   basic_list.has_subscriber?( subscriber )
-  #   => true|false
-  #
-  #   # get all the subscribers to the list
-  #   basic_list.subscribers
-  #   => [ET::Subscribers,ET::Subscribers]
-  #
-  #   # delete the list
-  #   basic_list.delete!
-  #   => nil
+  #   # send an email to a list
+  #   list_id = 147000
+  #   email_template_id = 9999123
+  #   list = ET::List.new('username', 'password')
+  #   list.send_email(list_id, email_template_id, {:first_name => 'John', :last_name => 'Wayne'})
   #
   class List < Client
     attr_reader :attributes
@@ -91,7 +77,8 @@ module ET
       Error.check_response_error(response)
       load_list( response.read_body )
     end
-
+    
+    # returns a new list object by list name
     def retrieve_by_name( name )
       @search_type = "listname"
       @search_value = name
@@ -101,17 +88,6 @@ module ET
       Error.check_response_error(response)
       load_list( response.read_body )
     end
-
-    def load_list( body )
-      doc = Hpricot.XML( body )
-      doc.at("list").each_child do|child|
-        if child.respond_to?(:name) and child.respond_to?(:inner_html)
-          @attributes[child.name] = child.inner_html
-        end
-      end
-      self
-    end
-    private :load_list
 
     # defaults type to private if not private or public
     # returns the new list id
@@ -127,6 +103,23 @@ module ET
       doc.at("list_description").inner_html.to_i
     end
     
+    def subscriber_emails(list_id)
+      @list_id = list_id
+      response = send do|io|
+        io << render_template('list_retrieve_subscribers')
+      end
+      Error.check_response_error(response)
+      body = response.read_body
+      puts "Body: #{body}\n\n"
+      doc = Hpricot.XML( body )
+      emails = []
+      (doc/"Email__Address").each do |row|
+        emails << row.inner_html
+      end
+      emails
+    end
+    
+    # Sends an email to the list specified
     def send_email(list_id, email_id, attrs = {})
       defaults = {:from_name => '', :from_email => '', :additional => '',
                   :multipart_mime => true, :track_links => true, :send_date => 'immediate', :send_time => ''}
@@ -138,6 +131,18 @@ module ET
       Error.check_response_error(response)
       puts "Response Body: #{response.read_body} \n"
       #doc = Hpricot.XML( response.read_body )
+    end
+    
+    private
+    
+    def load_list( body )
+      doc = Hpricot.XML( body )
+      doc.at("list").each_child do|child|
+        if child.respond_to?(:name) and child.respond_to?(:inner_html)
+          @attributes[child.name] = child.inner_html
+        end
+      end
+      self
     end
 
   end
