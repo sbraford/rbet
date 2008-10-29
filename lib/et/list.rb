@@ -110,7 +110,6 @@ module ET
       end
       Error.check_response_error(response)
       body = response.read_body
-      puts "Body: #{body}\n\n"
       doc = Hpricot.XML( body )
       emails = []
       (doc/"Email__Address").each do |row|

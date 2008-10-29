@@ -1,0 +1,8 @@
+<system>
+  <system_name>tracking</system_name>
+  <action>retrieve</action>
+  <sub_action>summary</sub_action>
+  <search_type>jobID</search_type>
+  <search_value><%= @job_id %></search_value>
+  <search_value2></search_value2>
+</system>
