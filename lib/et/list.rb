@@ -129,8 +129,9 @@ module ET
         io << render_template('list_send_email')
       end
       Error.check_response_error(response)
-      puts "Response Body: #{response.read_body} \n"
-      #doc = Hpricot.XML( response.read_body )
+      #puts "Response Body: #{response.read_body} \n"
+      doc = Hpricot.XML( response.read_body )
+      doc.at("job_description").inner_html.to_i rescue nil
     end
     
     private
