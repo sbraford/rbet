@@ -29,7 +29,11 @@ module ET
       @code = error_code 
       @message = error_msg
     end
-
+    
+    def to_s
+      "Code: #{@code}.  Message: #{@message}"
+    end
+    
     # raise a new error object from an HTTP response if it contains an error
     def self.check_response_error(response)
       if response.class != Net::HTTPOK
